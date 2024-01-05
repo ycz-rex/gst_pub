@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package gst_task;
 
-service Greeter {
+service GstTask {
   rpc StartTask (StartRequest) returns (StartReply) {}
-  rpc StopTask (StopRequest) returns (StopReply) {}
+  rpc StopTask (RunRequest) returns (RunReply) {}
   rpc RunTask (RunRequest) returns (RunReply){}
   rpc GetTaskStatus (TaskRequest) returns (TaskReply){}
   rpc SetTaskProp (SetTaskPropRequest) returns (TaskReply){}
@@ -30,7 +30,7 @@ message TaskRequest{
 
 message SetTaskPropRequest{
     string service_id = 1;
-    repeated SetPropRequest =2;
+    repeated SetPropRequest reqs =2;
 }
 
 message SetPropRequest{
@@ -45,5 +45,5 @@ message RunRequest {
 
 message RunReply {
   int32 status_code = 1;
-  bytes result = 1; 
+  bytes result = 2; 
 }
