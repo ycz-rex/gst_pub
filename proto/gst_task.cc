@@ -13,23 +13,24 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
 using gst_task::GstTask;
-using gst_task::StartTask;
+using gst_task::StartRequest;
 using gst_task::StartReply;
 
 // Logic and data behind the server's behavior.
 class GstTaskImpl final : public GstTask::Service {
-  Status StartTask(::grpc::ServerContext *context,
-                   const ::gst_task::StartRequest *request,
-                   ::gst_task::StartReply *response) override {
-    std::string prefix("Hello ");
-    reply->set_message(prefix + request->name());
+  Status StartTask(ServerContext *context, const StartRequest *request,
+                   StartReply *response) override {
+    // std::string prefix("Hello ");
+    std::cout << "hello";
+    response->set_status_code(10);
+    std::cout << "sjdlajdkls";
     return Status::OK;
   }
 };
 
 void RunServer() {
   std::string server_address("0.0.0.0:50051");
-  GreeterServiceImpl service;
+  GstTaskImpl service;
 
   grpc::EnableDefaultHealthCheckService(true);
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
